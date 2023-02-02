@@ -6,7 +6,7 @@ import { Todo } from "./todo.model";
 const App: React.FC = () => {
   const [todoList, setTodoList] = useState<Todo[]>([]);
 
-  const TodoAddHandler = (text: string) => {
+  const todoAddHandler = (text: string) => {
     console.log(text);
     setTodoList((prevTodoList) => [
       ...prevTodoList,
@@ -14,10 +14,16 @@ const App: React.FC = () => {
     ]);
   };
 
+  const todoDeleteHandler = (todoId: string) => {
+    setTodoList((prevTodoList) => {
+      return prevTodoList.filter((todoList) => todoList.id !== todoId);
+    });
+  };
+
   return (
     <div className="App">
-      <NewTodo onAddTodo={TodoAddHandler} />
-      <TodoList items={todoList} />
+      <NewTodo onAddTodo={todoAddHandler} />
+      <TodoList items={todoList} onDeleteTodo={todoDeleteHandler} />
     </div>
   );
 };
