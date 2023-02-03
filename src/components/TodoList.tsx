@@ -3,11 +3,18 @@ import { Todo } from "../models/todo";
 import TodoItem from "./TodoItem";
 import "./TodoList.css";
 
-const TodoList: React.FC<{ items: Todo[] }> = (props) => {
+const TodoList: React.FC<{
+  items: Todo[];
+  onDeleteTodo: (id: string) => void;
+}> = (props) => {
   return (
     <ul>
       {props.items.map((item) => (
-        <TodoItem id={item.id} text={item.text} />
+        <TodoItem
+          id={item.id}
+          text={item.text}
+          onDeleteTodo={props.onDeleteTodo.bind(null, item.id)}
+        />
       ))}
     </ul>
   );

@@ -1,8 +1,14 @@
-const TodoItem: React.FC<{ id: string; text: string }> = (props) => {
+import React from "react";
+
+const TodoItem: React.FC<{
+  id: string;
+  text: string;
+  onDeleteTodo: () => void;
+}> = (props) => {
   return (
     <li key={props.id}>
       <span>{props.text}</span>
-      {/* <button onClick={props.onDeleteTodo.bind(null, todo.id)}>DELETE</button> */}
+      <button onClick={props.onDeleteTodo}>DELETE</button>
     </li>
   );
 };
