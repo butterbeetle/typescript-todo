@@ -1,21 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { TodosContext } from "../store/todos-context";
+import TodoItem from "./TodoItem";
 import "./TodoList.css";
 
-interface TodoListProps {
-  items: { id: string; text: string }[];
-  onDeleteTodo: (id: string) => void;
-}
+const TodoList: React.FC = () => {
+  const todosCtx = useContext(TodosContext);
 
-const TodoList: React.FC<TodoListProps> = (props) => {
   return (
     <ul>
-      {props.items.map((todo) => (
-        <li key={todo.id}>
-          <span>{todo.text}</span>
-          <button onClick={props.onDeleteTodo.bind(null, todo.id)}>
-            DELETE
-          </button>
-        </li>
+      {todosCtx.items.map((item) => (
+        <TodoItem
+          id={item.id}
+          text={item.text}
+          onDeleteTodo={todosCtx.removeTodo.bind(null, item.id)}
+        />
       ))}
     </ul>
   );
